@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Word MCQ Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            color: white;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .instructions {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .instructions h2 {
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .test-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #ddd;
+        }
+        
+        .option:hover {
+            background-color: #f0f0f0;
+            border-color: #bbb;
+        }
+        
+        .option.selected {
+            background-color: #e6f7ff;
+            border-color: #667eea;
+        }
+        
+        .option input {
+            margin-right: 12px;
+            cursor: pointer;
+        }
+        
+        .option label {
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+        }
+        
+        .submit-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .results {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 25px;
+        }
+        
+        .results h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 20px 0;
+        }
+        
+        .score-details {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .restart-btn {
+            background: linear-gradient(to right, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (min-width: 768px) {
+            .options {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            header h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Microsoft Word MCQ Test</h1>
+            <p>Test your knowledge of Microsoft Word with these 10 multiple choice questions</p>
+        </header>
+        
+        <div class="instructions">
+            <h2>Instructions</h2>
+            <ul>
+                <li>This test contains 10 multiple choice questions about Microsoft Word</li>
+                <li>Select one answer for each question</li>
+                <li>Click the "Submit Answers" button at the end to see your score</li>
+                <li>You will receive 1 point for each correct answer</li>
+                <li>Good luck!</li>
+            </ul>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <div class="test-container" id="test-container">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="submit-section">
+            <button class="submit-btn" id="submit-btn">
+                <i class="fas fa-paper-plane"></i> Submit Answers
+            </button>
+        </div>
+        
+        <div class="results" id="results">
+            <h2>Your Results</h2>
+            <div class="score" id="score">0/10</div>
+            <div class="score-details" id="score-details"></div>
+            <button class="restart-btn" id="restart-btn">
+                <i class="fas fa-redo"></i> Take Test Again
+            </button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 Microsoft Word MCQ Test | Designed for Educational Purposes</p>
+    </footer>
+
+    <script>
+        // Sample questions data (shortened for brevity)
+       const questions = [
+    {
+        question: "What is Microsoft Word software?",
+        options: [
+            "A web browser",
+            "A word processing program",
+            "A video editing software",
+            "A spreadsheet program"
+        ],
+        answer: 1
+    },
+    {
+        question: "Who invented Microsoft Word?",
+        options: [
+            "Charles Simonyi",
+            "Paul Allen",
+            "Steve Jobs",
+            "Bill Gates"
+        ],
+        answer: 0
+    },
+    {
+        question: "What is the default file extension for a Word document?",
+        options: [
+            ".pdf",
+            ".docx",
+            ".xls",
+            ".txt"
+        ],
+        answer: 1
+    },
+    {
+        question: "What are the features of MS Word?",
+        options: [
+            "File compression and encryption",
+            "Video editing, sound mixing, and animation",
+            "Spreadsheet calculations and data analysis",
+            "Text formatting, spell check, and templates"
+        ],
+        answer: 3
+    },
+    {
+        question: "Can I download MS Word for free?",
+        options: [
+            "No, it is a paid software only",
+            "Yes, through a third-party website",
+            "Yes, but only a limited trial version is available",
+            "Yes, MS Word is always free to download"
+        ],
+        answer: 2
+    },
+    {
+        question: "Which tab contains the options to change the font and paragraph formatting in MS Word?",
+        options: ["Insert","Review","View","Home"],
+        answer: 3
+    },
+    {
+        question: "How do you save a document in Microsoft Word?",
+        options: ["Ctrl + S","Ctrl + P","Ctrl + F","Ctrl + A"],
+        answer: 0
+    },
+    {
+        question: "What does the 'Page Layout' tab allow you to adjust?",
+        options: ["Inserting hyperlinks","Text color","Fonts and paragraphs","Margins, orientation, and size"],
+        answer: 3
+    },
+    {
+        question: "Which shortcut key is used to open a new document in Microsoft Word?",
+        options: ["Ctrl + S","Ctrl + N","Ctrl + P","Ctrl + O"],
+        answer: 1
+    },
+    {
+        question: "How do you apply bold formatting to selected text in Word?",
+        options: ["Ctrl + U","Ctrl + N","Ctrl + B","Ctrl + P"],
+        answer: 2
+    },
+    {
+        question: "What feature in MS Word helps you automatically correct common spelling mistakes?",
+        options: ["AutoCorrect","Thesaurus","Word Count","Grammar Check"],
+        answer: 0
+    },
+    {
+        question: "How can you insert a page break in a Word document?",
+        options: ["Ctrl + P","Ctrl + Enter","Ctrl + A","Ctrl + S"],
+        answer: 1
+    },
+    {
+        question: "What is the shortcut key to copy text in MS Word?",
+        options: ["Ctrl + Z","Ctrl + X","Ctrl + V","Ctrl + C"],
+        answer: 3
+    },
+    {
+        question: "Which of the following keyboard shortcuts is used to paste text in MS Word?",
+        options: ["Ctrl + V","Ctrl + X","Ctrl + Z","Ctrl + C"],
+        answer: 0
+    },
+    {
+        question: "Which of the following is NOT a text alignment option in MS Word?",
+        options: ["Center","Right","Left","Bottom"],
+        answer: 3
+    },
+    {
+        question: "Which option allows you to add a watermark to a document?",
+        options: ["Insert -> Header","Design -> Watermark","Review -> Watermark","Page Layout -> Watermark"],
+        answer: 1
+    },
+    {
+        question: "Which of the following is used to create a table of contents in MS Word?",
+        options: ["Insert → Table of Contents","Home → Table","References → Table of Contents","View → Table of Contents"],
+        answer: 2
+    },
+    {
+        question: "What is MS Word Mail Merge?",
+        options: [
+            "A feature used to create mailing labels, envelopes, and form letters",
+            "A feature to combine multiple Word documents into one",
+            "A feature that merges different file formats into one",
+            "A feature used to send personalized emails to a group"
+        ],
+        answer: 0
+    },
+    {
+        question: "How can you change the margins of a document in MS Word?",
+        options: ["Home -> Margins","Layout -> Margins","Insert -> Margins","Page Layout -> Margins"],
+        answer: 1
+    },
+    {
+        question: "Which of the following options is used to add a header in MS Word?",
+        options: ["Insert -> Header","View -> Header","Home -> Header","Page Layout -> Header"],
+        answer: 0
+    },
+    {
+        question: "Which option in Word is used to check spelling and grammar?",
+        options: ["Insert -> Proofing","Review -> Spelling & Grammar","File -> Options","Home -> Editing"],
+        answer: 1
+    },
+    {
+        question: "What is the shortcut for Undo action in MS Word?",
+        options: ["Ctrl + R","Ctrl + Y","Ctrl + Z","Ctrl + X"],
+        answer: 2
+    },
+    {
+        question: "What is the shortcut for Redo action in MS Word?",
+        options: ["Ctrl + Y","Ctrl + Z","Ctrl + X","Ctrl + R"],
+        answer: 0
+    },
+    {
+        question: "Which of the following can be inserted into a Word document?",
+        options: ["Pictures","Charts","Tables","All of the above"],
+        answer: 3
+    },
+    {
+        question: "Which tab contains the 'Track Changes' feature?",
+        options: ["Review","Insert","View","Home"],
+        answer: 0
+    }
+    
+];
+questions.push(
+    {
+        question: "Which shortcut key is used to find text in a Word document?",
+        options: ["Ctrl + F","Ctrl + H","Ctrl + G","Ctrl + N"],
+        answer: 0
+    },
+    {
+        question: "Which shortcut key is used to replace text in Word?",
+        options: ["Ctrl + C","Ctrl + V","Ctrl + H","Ctrl + R"],
+        answer: 2
+    },
+    {
+        question: "What is the maximum zoom percentage in MS Word?",
+        options: ["200%","400%","500%","1000%"],
+        answer: 3
+    },
+    {
+        question: "What is the minimum zoom percentage in MS Word?",
+        options: ["5%","10%","25%","50%"],
+        answer: 1
+    },
+    {
+        question: "Which of the following views is NOT available in MS Word?",
+        options: ["Print Layout","Web Layout","Outline","Draft","Slide Sorter"],
+        answer: 4
+    },
+    {
+        question: "Which tab is used to insert a chart in Word?",
+        options: ["Insert","View","Home","Design"],
+        answer: 0
+    },
+    {
+        question: "Which option is used to split a cell in a Word table?",
+        options: ["Layout -> Merge","Layout -> Split Cells","Insert -> Split","Review -> Split"],
+        answer: 1
+    },
+    {
+        question: "Which feature allows you to combine cells in a Word table?",
+        options: ["Split Cells","Merge Cells","Table Join","Cell Link"],
+        answer: 1
+    },
+    {
+        question: "Which option is used to insert page numbers in a document?",
+        options: ["Insert -> Page Number","Layout -> Page","Review -> Numbering","Home -> Insert Number"],
+        answer: 0
+    },
+    {
+        question: "What is the shortcut key to select all text in a document?",
+        options: ["Ctrl + A","Ctrl + S","Ctrl + C","Ctrl + V"],
+        answer: 0
+    },
+    {
+        question: "Which option is used to add footnotes in Word?",
+        options: ["Insert -> Footnote","References -> Insert Footnote","Review -> Footnote","Layout -> Footnote"],
+        answer: 1
+    },
+    {
+        question: "Which shortcut key is used to print a document?",
+        options: ["Ctrl + S","Ctrl + P","Ctrl + O","Ctrl + D"],
+        answer: 1
+    },
+    {
+        question: "Which option is used to add a hyperlink in Word?",
+        options: ["Insert -> Hyperlink","Layout -> Hyperlink","Review -> Link","Home -> Insert Link"],
+        answer: 0
+    },
+    {
+        question: "Which shortcut key is used to open the 'Save As' dialog box?",
+        options: ["F9","F10","F11","F12"],
+        answer: 3
+    },
+    {
+        question: "Which feature in Word is used to create a list with numbers or bullets?",
+        options: ["Paragraph -> Numbering/Bullets","Insert -> List","View -> List","Layout -> List"],
+        answer: 0
+    },
+    {
+        question: "Which option is used to insert a table in Word?",
+        options: ["Insert -> Table","Layout -> Table","Design -> Table","Review -> Table"],
+        answer: 0
+    },
+    {
+        question: "What is the default font in Word 2016 and later?",
+        options: ["Times New Roman","Calibri","Arial","Verdana"],
+        answer: 1
+    },
+    {
+        question: "What is the default font size in MS Word?",
+        options: ["10","11","12","14"],
+        answer: 1
+    },
+    {
+        question: "Which option is used to insert symbols in Word?",
+        options: ["Insert -> Symbol","Layout -> Symbol","Review -> Symbol","Design -> Symbol"],
+        answer: 0
+    },
+    {
+        question: "Which feature is used to see how a document will look when printed?",
+        options: ["Print Preview","Draft View","Outline View","Zoom"],
+        answer: 0
+    },
+    {
+        question: "Which option is used to change page orientation in Word?",
+        options: ["Home -> Orientation","Layout -> Orientation","Insert -> Orientation","Review -> Orientation"],
+        answer: 1
+    },
+    {
+        question: "Which page orientations are available in Word?",
+        options: ["Portrait and Landscape","Vertical and Horizontal","Tall and Wide","A4 and A3"],
+        answer: 0
+    },
+    {
+        question: "Which shortcut key is used to open an existing document?",
+        options: ["Ctrl + S","Ctrl + O","Ctrl + N","Ctrl + P"],
+        answer: 1
+    },
+    {
+        question: "What is the function of Ctrl + X in Word?",
+        options: ["Copy","Paste","Cut","Undo"],
+        answer: 2
+    },
+    {
+        question: "What is the function of Ctrl + C in Word?",
+        options: ["Cut","Paste","Copy","Redo"],
+        answer: 2
+    }
+);
+
+
+
+        // DOM elements
+        const testContainer = document.getElementById('test-container');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultsDiv = document.getElementById('results');
+        const scoreDiv = document.getElementById('score');
+        const scoreDetailsDiv = document.getElementById('score-details');
+        const restartBtn = document.getElementById('restart-btn');
+        const progressBar = document.getElementById('progress');
+
+        // Initialize test
+        function initializeTest() {
+            testContainer.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const questionEl = document.createElement('div');
+                questionEl.className = 'question';
+                
+                questionEl.innerHTML = `
+                    <div class="question-number">Question ${index + 1}/${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option" data-index="${i}">
+                                <input type="radio" name="question${index}" id="q${index}opt${i}" value="${i}">
+                                <label for="q${index}opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                testContainer.appendChild(questionEl);
+            });
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const questionIndex = parseInt(option.parentElement.parentElement.querySelector('.question-number').textContent.split(' ')[1].split('/')[0]) - 1;
+                    const optionIndex = parseInt(option.getAttribute('data-index'));
+                    
+                    // Clear other selections in this question
+                    const options = option.parentElement.querySelectorAll('.option');
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Select this option
+                    option.classList.add('selected');
+                    option.querySelector('input').checked = true;
+                    
+                    // Update progress bar
+                    updateProgressBar();
+                });
+            });
+            
+            // Hide results and show test
+            resultsDiv.style.display = 'none';
+            testContainer.style.display = 'block';
+            submitBtn.style.display = 'block';
+            
+            // Reset progress bar
+            progressBar.style.width = '0%';
+        }
+
+        // Update progress bar based on answered questions
+        function updateProgressBar() {
+            const answeredQuestions = document.querySelectorAll('input:checked').length;
+            const progress = (answeredQuestions / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Calculate score
+        function calculateScore() {
+            let score = 0;
+            const userAnswers = [];
+            
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                const userAnswer = selectedOption ? parseInt(selectedOption.value) : -1;
+                userAnswers.push(userAnswer);
+                
+                if (userAnswer === q.answer) {
+                    score++;
+                }
+            });
+            
+            return { score, userAnswers };
+        }
+
+        // Show results
+        function showResults(score, userAnswers) {
+            scoreDiv.textContent = `${score}/${questions.length}`;
+            
+            let detailsHTML = '<div style="text-align: left; margin-top: 20px;">';
+            questions.forEach((q, index) => {
+                const isCorrect = userAnswers[index] === q.answer;
+                detailsHTML += `
+                    <div style="margin-bottom: 15px; padding: 10px; border-left: 4px solid ${isCorrect ? '#4CAF50' : '#F44336'}; background-color: #f9f9f9;">
+                        <div style="font-weight: bold;">Q${index + 1}: ${q.question}</div>
+                        <div style="color: ${isCorrect ? '#4CAF50' : '#F44336'}; margin-top: 5px;">
+                            ${isCorrect ? '✓ Correct' : '✗ Incorrect'}
+                        </div>
+                    </div>
+                `;
+            });
+            detailsHTML += '</div>';
+            
+            scoreDetailsDiv.innerHTML = detailsHTML;
+            
+            // Hide test and show results
+            testContainer.style.display = 'none';
+            submitBtn.style.display = 'none';
+            resultsDiv.style.display = 'block';
+        }
+
+        // Event listeners
+        submitBtn.addEventListener('click', () => {
+            const { score, userAnswers } = calculateScore();
+            showResults(score, userAnswers);
+        });
+
+        restartBtn.addEventListener('click', initializeTest);
+
+        // Initialize the test
+        initializeTest();
+    </script>
+</body>
+</html>
